@@ -52,6 +52,10 @@
 viewBox는 다섯 파일 모두 `52 81 1056 1056`(정사각, 마크 가운데 정렬)라 서로 바꿔 끼울 수 있다.
 잎은 `#leaf-top` `#leaf-mid` `#leaf-bot` 세 path이고 그리는 순서가 곧 z-order(아래 잎이 맨 위)다.
 
+Figma 브랜드 파일: https://www.figma.com/design/25DpM8yBlpfhiZnQ8k8nWK (가볍지이지 브랜드, Test Design 팀).
+비어 있다 — `assets/*.svg` 를 캔버스에 끌어다 놓으면 그라데이션까지 그대로 들어온다.
+MCP 로 자동 배치하려면 Figma Starter 플랜의 월 20회 도구 호출 한도를 넘겨야 한다.
+
 ## 아직 없는 것
 
 
