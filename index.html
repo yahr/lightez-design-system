@@ -8,7 +8,7 @@
 <link rel="apple-touch-icon" href="assets/favicon/mark-180.png">
 <meta name="description" content="가볍지이지(LightEZ) 브랜드와 SignalB 앱·리포트가 함께 쓰는 토큰·타이포·컴포넌트 레퍼런스">
 <!--
-  가볍지이지 디자인 시스템 v0.2 (2026-09-12)
+  가볍지이지 디자인 시스템 v0.3 (2026-09-13)
   원본: github.com/yahr/lightez-design-system/index.html — 이 저장소가 소스 오브 트루스
   쓰는 곳: 가볍지이지 브랜드 전반, SignalB 웹 앱·대시보드, 고객용 캠페인 리포트
   참고: 토스 TDS(타이포·해요체 라이팅), 당근 SEED(2단 토큰·4px 치수·라운드·모션)
@@ -23,174 +23,12 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="tokens.css">
 <style>
-/* ==========================================================================
-   0. 서체
-   헤딩 = 에이투지체(A2z, 눈누 1778, OFL). 본문 = Apple SD Gothic Neo(시스템).
-   대화체 = 그리운X국한박 뚜레(눈누 1889, OFL) — 캐릭터 대사·친근한 한 줄에만.
-   비-Mac에서는 Pretendard → 맑은 고딕 → Noto Sans KR 순으로 떨어진다.
-   ========================================================================== */
-@font-face { font-family: 'A2z'; font-weight: 500; font-display: swap;
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2601-6@1.0/에이투지체-5Medium.woff2') format('woff2'); }
-@font-face { font-family: 'A2z'; font-weight: 600; font-display: swap;
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2601-6@1.0/에이투지체-6SemiBold.woff2') format('woff2'); }
-@font-face { font-family: 'A2z'; font-weight: 700; font-display: swap;
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2601-6@1.0/에이투지체-7Bold.woff2') format('woff2'); }
-@font-face { font-family: 'Tture'; font-weight: 400; font-display: swap;
-  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/2607161334@x-7/x/GriunXHangeulDDURAE-Regular.woff2') format('woff2'); }
-
-/* ==========================================================================
-   1. 토큰 — 스케일(테마 무관) → 시맨틱(라이트/다크)
-   구조: ① :root 라이트 전체 → ② OS 다크(명시적 라이트가 아니면) → ③ data-theme=dark → ④ print
-   컴포넌트는 시맨틱 토큰만 본다. 스케일 토큰을 직접 쓰지 않는다.
-   ========================================================================== */
-:root {
-  color-scheme: light;
-
-  /* 스케일 — 민트(브랜드) */
-  --c-mint-50:  #e6fbf8; --c-mint-100: #c2f4ec; --c-mint-200: #93ebde; --c-mint-300: #5fe2cf;
-  --c-mint-400: #2ed8c3; --c-mint-500: #17bfa9; --c-mint-600: #0fa08d; --c-mint-700: #0b7f70;
-  --c-mint-800: #075e53; --c-mint-900: #043d36;
-  /* 스케일 — 그레이(민트 쪽으로 살짝 기운 쿨 그레이) */
-  --c-grey-50:  #f7f9fb; --c-grey-100: #eef1f5; --c-grey-200: #e1e6ec; --c-grey-300: #cbd3db;
-  --c-grey-400: #9ba6b2; --c-grey-500: #6e7a88; --c-grey-600: #4c5866; --c-grey-700: #33404e;
-  --c-grey-800: #243040; --c-grey-900: #16202b;
-  /* 스케일 — 레드 */
-  --c-red-50:  #fbecea; --c-red-100: #f6d6d2; --c-red-200: #f0b5ae; --c-red-300: #e7908a;
-  --c-red-400: #de6a62; --c-red-500: #d0463a; --c-red-600: #c0392b; --c-red-700: #9e2f23;
-  --c-red-800: #7a241b; --c-red-900: #521811;
-  /* 스케일 — 앰버 */
-  --c-amber-50:  #fff7e8; --c-amber-100: #fbe7bf; --c-amber-200: #f5d08c; --c-amber-300: #ecbb5e;
-  --c-amber-400: #e0a84a; --c-amber-500: #c98a1f; --c-amber-600: #a5661a; --c-amber-700: #7f4e12;
-  --c-amber-800: #5c380d; --c-amber-900: #3a2308;
-  /* 스케일 — 그린(브랜드와 구분되게 노랑 기운) */
-  --c-green-50:  #eaf8ef; --c-green-100: #c6ebd3; --c-green-200: #9adcb3; --c-green-300: #6ccb94;
-  --c-green-400: #3fbf7c; --c-green-500: #22a06b; --c-green-600: #1a7a52; --c-green-700: #14593d;
-  --c-green-800: #0f4230; --c-green-900: #0a2b1f;
-
-  /* 시맨틱 — 바탕 */
-  --bg-page:    var(--c-grey-50);
-  --bg-surface: #ffffff;
-  --bg-raised:  #ffffff;
-  --bg-subtle:  var(--c-grey-100);
-  --bg-inverse: var(--c-grey-900);
-  --bg-brand:        var(--c-mint-600);
-  --bg-brand-hover:  var(--c-mint-700);
-  --bg-brand-soft:   var(--c-mint-50);
-  --bg-danger:       var(--c-red-600);
-  --bg-danger-hover: var(--c-red-700);
-  /* 시맨틱 — 글자 */
-  --fg-primary:   var(--c-grey-900);
-  --fg-secondary: var(--c-grey-600);
-  --fg-muted:     var(--c-grey-500);
-  --fg-disabled:  var(--c-grey-400);
-  --fg-brand:     var(--c-mint-700);
-  --fg-link:      var(--c-mint-700);
-  --fg-on-brand:  #ffffff;
-  --fg-on-danger: #ffffff;
-  --fg-inverse:   #ffffff;
-  /* 시맨틱 — 선 */
-  --stroke-default: var(--c-grey-200);
-  --stroke-strong:  var(--c-grey-300);
-  --stroke-brand:   var(--c-mint-500);
-  --stroke-focus:   var(--c-mint-500);
-  /* 시맨틱 — 상태. -soft 는 바탕, -ink 는 그 위 글자, -line 은 테두리 */
-  --ok:          var(--c-green-500); --ok-soft:     var(--c-green-50); --ok-ink:     var(--c-green-600); --ok-line:     var(--c-green-100);
-  --warn:        var(--c-amber-500); --warn-soft:   var(--c-amber-50); --warn-ink:   var(--c-amber-600); --warn-line:   var(--c-amber-100);
-  --danger:      var(--c-red-600);   --danger-soft: var(--c-red-50);   --danger-ink: var(--c-red-700);   --danger-line: var(--c-red-100);
-  /* 시맨틱 — SignalB 등급. 색은 역할 별칭이고, 채움/연함은 배지가 정한다 */
-  --grade-strong_opportunity: var(--ok);
-  --grade-recommend:          var(--ok);
-  --grade-monitor:            var(--warn);
-  --grade-risk:               var(--danger);
-  --grade-avoid:              var(--danger);
-  /* 시맨틱 — 데이터 없음. 0 이 아니라 '없음'을 그린다 */
-  --nodata-fg:     var(--c-grey-500);
-  --nodata-stroke: var(--c-grey-300);
-  --overlay: rgba(22, 32, 43, 0.48);
-
-  /* 그림자 */
-  --sh-1: 0 1px 2px rgba(22, 32, 43, 0.06);
-  --sh-2: 0 2px 6px rgba(22, 32, 43, 0.08), 0 8px 24px rgba(22, 32, 43, 0.06);
-  --sh-3: 0 12px 40px rgba(22, 32, 43, 0.16);
-
-  /* 치수 — 4px 베이스 */
-  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 20px; --sp-6: 24px;
-  --sp-8: 32px; --sp-10: 40px; --sp-12: 48px; --sp-16: 64px;
-  /* 형태 */
-  --r-xs: 4px; --r-sm: 8px; --r-md: 12px; --r-lg: 16px; --r-xl: 24px; --r-pill: 999px; --r-full: 50%;
-  /* 모션 */
-  --dur-fast: 120ms; --dur-base: 200ms;
-  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
-  --ease-inout: cubic-bezier(0.4, 0, 0.2, 1);
-
-  /* 서체 */
-  --font-head: 'A2z', 'Apple SD Gothic Neo', -apple-system, BlinkMacSystemFont, 'Pretendard Variable', Pretendard, 'Malgun Gothic', 'Noto Sans KR', system-ui, sans-serif;
-  --font-body: 'Apple SD Gothic Neo', -apple-system, BlinkMacSystemFont, 'Pretendard Variable', Pretendard, 'Malgun Gothic', 'Noto Sans KR', system-ui, sans-serif;
-  --font-talk: 'Tture', 'Apple SD Gothic Neo', -apple-system, BlinkMacSystemFont, 'Pretendard Variable', Pretendard, 'Malgun Gothic', 'Noto Sans KR', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
-  /* 타이포 스케일 t1~t9. 헤딩(t1~t4, t9)은 A2z, 본문(t5~t8)은 본문 서체 */
-  --t1: 700 32px/1.3 var(--font-head);   --t1-ls: -0.02em;
-  --t2: 700 26px/1.35 var(--font-head);  --t2-ls: -0.015em;
-  --t3: 700 22px/1.4 var(--font-head);   --t3-ls: -0.01em;
-  --t4: 600 18px/1.45 var(--font-head);  --t4-ls: 0;
-  --t5: 500 16px/1.6 var(--font-body);   --t5-ls: 0;
-  --t6: 400 15px/1.6 var(--font-body);   --t6-ls: 0;
-  --t7: 400 14px/1.55 var(--font-body);  --t7-ls: 0;
-  --t8: 500 13px/1.5 var(--font-body);   --t8-ls: 0;
-  --t9: 500 12px/1.45 var(--font-head);  --t9-ls: 0.01em;
-  /* 대화체 — 손글씨라 한 단계 크게, 줄간격 넉넉히. 캐릭터 대사·인사 한 줄에만 */
-  --t-talk: 400 18px/1.7 var(--font-talk); --t-talk-ls: 0;
-}
-
-/* ② OS 다크. 명시적 라이트 선택은 이긴다 */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    color-scheme: dark;
-    --bg-page: #10161d; --bg-surface: var(--c-grey-900); --bg-raised: #1c2733; --bg-subtle: var(--c-grey-800); --bg-inverse: var(--c-grey-100);
-    --bg-brand: var(--c-mint-400); --bg-brand-hover: var(--c-mint-300); --bg-brand-soft: #0f3a36;
-    --bg-danger: var(--c-red-400); --bg-danger-hover: var(--c-red-300);
-    --fg-primary: var(--c-grey-100); --fg-secondary: var(--c-grey-300); --fg-muted: var(--c-grey-400); --fg-disabled: var(--c-grey-600);
-    --fg-brand: var(--c-mint-400); --fg-link: var(--c-mint-300); --fg-on-brand: #04211e; --fg-on-danger: #2b0a08; --fg-inverse: var(--c-grey-900);
-    --stroke-default: #2e3a48; --stroke-strong: #3d4a5a; --stroke-brand: var(--c-mint-500); --stroke-focus: var(--c-mint-300);
-    --ok: var(--c-green-400); --ok-soft: #16342a; --ok-ink: var(--c-green-300); --ok-line: #275c47;
-    --warn: var(--c-amber-400); --warn-soft: #3a2c18; --warn-ink: var(--c-amber-300); --warn-line: #6b4e1e;
-    --danger: var(--c-red-400); --danger-soft: #3a1f22; --danger-ink: var(--c-red-300); --danger-line: #6b3339;
-    --nodata-fg: var(--c-grey-400); --nodata-stroke: #3d4a5a;
-    --overlay: rgba(0, 0, 0, 0.64);
-    --sh-1: 0 0 0 1px #2e3a48;
-    --sh-2: 0 0 0 1px #2e3a48, 0 8px 24px rgba(0, 0, 0, 0.4);
-    --sh-3: 0 0 0 1px #3d4a5a, 0 16px 48px rgba(0, 0, 0, 0.6);
-  }
-}
-/* ③ 토글로 고른 다크. ②와 같은 값 — 둘을 같이 고친다 */
-:root[data-theme="dark"] {
-  color-scheme: dark;
-  --bg-page: #10161d; --bg-surface: var(--c-grey-900); --bg-raised: #1c2733; --bg-subtle: var(--c-grey-800); --bg-inverse: var(--c-grey-100);
-  --bg-brand: var(--c-mint-400); --bg-brand-hover: var(--c-mint-300); --bg-brand-soft: #0f3a36;
-  --bg-danger: var(--c-red-400); --bg-danger-hover: var(--c-red-300);
-  --fg-primary: var(--c-grey-100); --fg-secondary: var(--c-grey-300); --fg-muted: var(--c-grey-400); --fg-disabled: var(--c-grey-600);
-  --fg-brand: var(--c-mint-400); --fg-link: var(--c-mint-300); --fg-on-brand: #04211e; --fg-on-danger: #2b0a08; --fg-inverse: var(--c-grey-900);
-  --stroke-default: #2e3a48; --stroke-strong: #3d4a5a; --stroke-brand: var(--c-mint-500); --stroke-focus: var(--c-mint-300);
-  --ok: var(--c-green-400); --ok-soft: #16342a; --ok-ink: var(--c-green-300); --ok-line: #275c47;
-  --warn: var(--c-amber-400); --warn-soft: #3a2c18; --warn-ink: var(--c-amber-300); --warn-line: #6b4e1e;
-  --danger: var(--c-red-400); --danger-soft: #3a1f22; --danger-ink: var(--c-red-300); --danger-line: #6b3339;
-  --nodata-fg: var(--c-grey-400); --nodata-stroke: #3d4a5a;
-  --overlay: rgba(0, 0, 0, 0.64);
-  --sh-1: 0 0 0 1px #2e3a48;
-  --sh-2: 0 0 0 1px #2e3a48, 0 8px 24px rgba(0, 0, 0, 0.4);
-  --sh-3: 0 0 0 1px #3d4a5a, 0 16px 48px rgba(0, 0, 0, 0.6);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  :root { --dur-fast: 0ms; --dur-base: 0ms; }
-  *, *::before, *::after { animation-duration: 0ms !important; transition-duration: 0ms !important; }
-}
-
 /* ==========================================================================
    2. 베이스
    ========================================================================== */
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0ms !important; transition-duration: 0ms !important; } }
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 body {
@@ -573,7 +411,6 @@ a.list-row:hover { background: var(--bg-subtle); }
   .axis-row { grid-template-columns: 80px 1fr 56px; }
 }
 @media print {
-  :root { color-scheme: light; --bg-page: #fff; --bg-surface: #fff; --bg-raised: #fff; --bg-subtle: #eef1f5; --fg-primary: #16202b; --fg-secondary: #4c5866; --fg-muted: #6e7a88; --stroke-default: #e1e6ec; --stroke-strong: #cbd3db; --bg-brand: #0fa08d; --fg-brand: #0b7f70; --fg-link: #0b7f70; --sh-1: none; --sh-2: none; --sh-3: none; }
   @page { margin: 16mm; }
   body { background: #fff; }
   .ds-bar, .ds-nav, .ds-scrim, .print-bar, .toast, .copy, .rules, .ds-theme { display: none !important; }
@@ -600,7 +437,7 @@ a.list-row:hover { background: var(--bg-subtle); }
 <nav class="ds-nav" id="ds-nav" aria-label="문서 목차">
   <a class="ds-brand" href="#top">
     <svg aria-hidden="true"><use href="#mark-small"/></svg>
-    <span><b>가볍지이지</b><small>Design System v0.2</small></span>
+    <span><b>가볍지이지</b><small>Design System v0.3</small></span>
   </a>
   <ol>
     <li><a href="#principles">원칙</a></li>
@@ -613,7 +450,6 @@ a.list-row:hover { background: var(--bg-subtle); }
     <li><a href="#writing">라이팅</a></li>
     <li><a href="#theme-print">다크모드·인쇄</a></li>
     <li><a href="#tokens">토큰 전체 목록</a></li>
-    <li><a href="#migration">마이그레이션</a></li>
   </ol>
   <div class="ds-nav-foot">
     <button class="btn btn--secondary btn--sm ds-theme" data-theme-toggle aria-live="polite">테마: 시스템</button>
@@ -628,7 +464,7 @@ a.list-row:hover { background: var(--bg-subtle); }
     <h1>가볍지이지 디자인 시스템</h1>
     <p>가볍지이지 브랜드 전반, SignalB 웹 앱과 대시보드, 그리고 고객이 받는 캠페인 리포트가 같은 토큰을 쓰도록 만든 레퍼런스예요. 당근 SEED의 토큰 구조와 형태, 토스의 타이포·라이팅 규칙을 참고하되 색과 서체는 우리 것으로 골랐어요.</p>
     <div class="ds-meta">
-      <span>가볍지이지 디자인 시스템 v0.2 · 2026-09-12</span>
+      <span>가볍지이지 디자인 시스템 v0.3 · 2026-09-13</span>
       <span>메인 컬러 <code>#2ed8c3</code></span>
       <span>헤딩 에이투지체 · 본문 Apple SD Gothic Neo · 대화체 뚜레</span>
       <span>외부 요청: 서체만</span>
@@ -648,7 +484,7 @@ a.list-row:hover { background: var(--bg-subtle); }
 
   <!-- ================================================================ 브랜드 -->
   <section class="ds-section" id="brand">
-    <header><h2>브랜드</h2><p>마크는 민트 깃털이에요. <b>바깥 윤곽이 하나의 곡선</b>이에요 — 줄기 끝에서 맨 위 깃털 끝까지 끊기지 않고 이어지고, 세 깃털은 안쪽에서 파인 노치로만 갈라져요. 전체가 path 한 장(세그먼트 26개)이고 위에서 아래로 흐르는 세로 그라데이션 하나를 써요. 파일은 <code>mark.svg</code>(기본) · <code>mark-dark.svg</code>(어두운 바탕) · <code>mark-onbrand.svg</code>(민트 바탕) · <code>mark-flat.svg</code>(단색 currentColor) · <code>mark-small.svg</code>(32px 이하)예요.</p></header>
+    <header><h2>브랜드</h2><p>마크는 민트 깃털이에요. <b>바깥 윤곽이 하나의 곡선</b>이에요 — 줄기 끝에서 맨 위 깃털 끝까지 끊기지 않고 이어지고, 세 깃털은 안쪽에서 파인 노치로만 갈라져요. 전체가 path 한 장(세그먼트 26개)이고 위에서 아래로 흐르는 세로 그라데이션 하나를 써요. 파일은 <code>mark.svg</code>(기본) · <code>mark-dark.svg</code>(어두운 바탕) · <code>mark-onbrand.svg</code>(민트 바탕) · <code>mark-flat.svg</code>(단색 currentColor) · <code>mark-small.svg</code>(32px 이하)예요. 글자까지 붙은 로고는 아래 <b>워드마크 · 락업</b>에 있어요.</p></header>
     <div class="brand-grid">
       <div class="brand-tile light"><svg aria-hidden="true"><use href="#mark-grad"/></svg><span class="wm">가볍지이지</span><small>흰 바탕 · 기본</small></div>
       <div class="brand-tile dark"><svg aria-hidden="true"><use href="#mark-grad-dark"/></svg><span class="wm">가볍지이지</span><small>어두운 바탕 · 마크가 밝아져요</small></div>
@@ -675,6 +511,25 @@ a.list-row:hover { background: var(--bg-subtle); }
       </div>
     </div>
 
+
+    <div class="ds-sub">
+      <h3>워드마크 · 락업</h3>
+      <p>"가볍지이지" 글자를 에이투지체 7Bold 윤곽선으로 옮긴 SVG예요. 서체를 못 쓰는 곳 — Figma, PPT, 메일 서명, 인쇄소 — 에서도 같은 모양이 나와요. 비율은 이 페이지에서 가져왔어요: 가로형은 사이드바 로고, 세로형은 위 브랜드 타일이에요.</p>
+      <div class="brand-grid">
+        <div class="brand-tile light" style="justify-content:center"><img src="assets/lockup-horizontal.svg" alt="가볍지이지 가로형 로고" style="height:40px"><small>lockup-horizontal.svg</small></div>
+        <div class="brand-tile light" style="justify-content:center"><img src="assets/lockup-vertical.svg" alt="가볍지이지 세로형 로고" style="height:88px"><small>lockup-vertical.svg</small></div>
+        <div class="brand-tile mint" style="justify-content:center"><img src="assets/lockup-horizontal-onbrand.svg" alt="가볍지이지 가로형 로고, 민트 바탕용" style="height:40px"><small>-onbrand.svg · 민트 바탕</small></div>
+        <div class="brand-tile dark" style="justify-content:center"><img src="assets/wordmark-dark.svg" alt="가볍지이지 워드마크, 어두운 바탕용" style="height:28px"><small>wordmark-dark.svg · 어두운 바탕</small></div>
+      </div>
+      <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>파일</th><th>쓰임</th></tr></thead><tbody>
+        <tr><td><code>lockup-horizontal*.svg</code></td><td class="wrap">마크 + 글자 가로. 헤더·명함·메일 서명</td></tr>
+        <tr><td><code>lockup-vertical*.svg</code></td><td class="wrap">마크 위, 글자 아래. 정사각에 가까운 자리 — 프로필 이미지·표지</td></tr>
+        <tr><td><code>wordmark*.svg</code></td><td class="wrap">글자만. 마크가 이미 옆에 있을 때</td></tr>
+        <tr><td><code>*-dark</code> · <code>*-onbrand</code> · <code>*-flat</code></td><td class="wrap">마크 파일과 같은 규칙 — 어두운 바탕 · 민트 바탕 · 단색 <code>currentColor</code></td></tr>
+      </tbody></table></div>
+      <p class="t8 muted">만들기: <code>python3 tools/build-wordmark.py</code> — 마크나 글자를 고치면 다시 돌려요. 파일을 손으로 고치지 않아요.</p>
+    </div>
+
     <div class="ds-sub">
       <h3>작은 크기</h3>
       <p>기본 마크는 32px 아래에서 깃털 사이 틈이 뭉개져요. 소형 판은 노치를 18px 넓힌 거예요 — 바깥 윤곽은 그대로고 틈만 벌어져요.</p>
@@ -699,13 +554,14 @@ a.list-row:hover { background: var(--bg-subtle); }
     </div>
 
     <details class="rules"><summary>사용 규칙</summary><div class="body">
-      <div class="do"><b>이렇게</b><ul><li>워드마크는 헤딩 서체(에이투지체 700)로, 마크 높이의 1/2 여백을 사방에 둬요</li><li>SignalB 제품명은 "SignalB" 한 단어로 붙여 써요. 리포트 kicker에서만 "Signal B · 시장 신호 리포트"를 허용해요</li><li><b>32px 이하에서는 <code>mark-small.svg</code></b>를 써요 — 노치를 18px 넓힌 판이라 작은 크기에서 깃털이 안 뭉개져요. 큰 크기에는 쓰지 않아요</li><li>마크 최소 크기 16px(파비콘), 워드마크 최소 12px</li></ul></div>
+      <div class="do"><b>이렇게</b><ul><li>워드마크는 헤딩 서체(에이투지체 700)로, 마크 높이의 1/2 여백을 사방에 둬요</li><li>SignalB 제품명은 "SignalB" 한 단어로 붙여 써요. 리포트 kicker에서만 "Signal B · 시장 신호 리포트"를 허용해요</li><li><b>32px 이하에서는 <code>mark-small.svg</code></b>를 써요 — 노치를 18px 넓힌 판이라 작은 크기에서 깃털이 안 뭉개져요. 큰 크기에는 쓰지 않아요</li><li>마크 최소 크기 16px(파비콘), 워드마크 최소 12px</li><li>서체를 못 쓰는 곳에서는 글자를 치지 말고 <code>lockup-*.svg</code> · <code>wordmark-*.svg</code>를 넣어요 — 대체 서체로 친 "가볍지이지"는 워드마크가 아니에요</li></ul></div>
       <div class="dont"><b>이렇게는 안 돼요</b><ul><li>마크에 그림자·외곽선을 얹지 않아요. 그라데이션은 파일에 든 세로 하나만 써요</li><li>새 변형을 만들면 <b>그라데이션 <code>id</code>를 반드시 바꿔요</b>(<code>lez-mark</code>, <code>lez-mark-dark</code>…). 같은 id로 두면 한 페이지에 여러 개를 인라인할 때 마지막 정의가 나머지를 덮어써요</li><li>민트 위에 민트 마크를 두지 않아요 — 민트 바탕에는 단색(짙은 민트) 마크</li><li>바깥 윤곽을 끊거나 깃털을 따로 떼어 쓰지 않아요 — 하나의 선이 이 마크의 정체성이에요</li></ul></div>
     </div></details>
 
     <div class="ds-sub">
       <h3>변경 이력</h3>
       <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>버전</th><th>날짜</th><th>바뀐 것</th></tr></thead><tbody>
+        <tr><td><code>v0.3</code></td><td>2026-09-13</td><td class="wrap">워드마크·가로형·세로형 로고 SVG 12개를 더했어요. 토큰을 <code>tokens.css</code>로 떼어 냈고, 종이 인쇄 색 표를 넣었어요. SignalB 마이그레이션 표는 <a href="https://github.com/yahr/SignalB/blob/main/docs/signalb-design-tokens.md">SignalB 저장소</a>로 옮겼어요</td></tr>
         <tr><td><code>v0.2</code></td><td>2026-09-12</td><td class="wrap">마크를 <b>하나의 윤곽선 + 세로 그라데이션</b>으로 다시 짰어요. path 한 장 26세그먼트, 1.35KB. 3톤 구성과 <code>mark-tone.svg</code>는 없어졌어요</td></tr>
         <tr><td><code>v0.1</code></td><td>2026-09-12</td><td class="wrap">토큰·타이포·컴포넌트 레퍼런스 첫 판. 마크는 원본 래스터를 추적한 3장 구성이었어요</td></tr>
       </tbody></table></div>
@@ -757,6 +613,7 @@ a.list-row:hover { background: var(--bg-subtle); }
       <p>지금 보고 있는 테마의 실제 값으로 계산해요. 테마를 바꾸면 표도 바뀌어요. 본문 글자는 4.5:1, 채움 버튼의 굵은 글자와 큰 숫자는 3:1이 기준이에요.</p>
       <div class="ds-table-wrap"><table class="ds-table" id="contrast-table"><thead><tr><th>글자</th><th>바탕</th><th>비율</th><th>판정</th><th>쓰임</th></tr></thead><tbody></tbody></table></div>
     </div>
+    <p class="t8 muted">스케일 원본 참고: <code>lightez-commerce-os/src/styles/tokens.css</code>의 그레이·레드 램프를 그대로 썼고, 민트 램프만 <code>#2ed8c3</code> 중심으로 다시 짰어요.</p>
   </section>
 
   <!-- ================================================================ 타이포 -->
@@ -1046,7 +903,7 @@ h1 { font: var(--t2); letter-spacing: var(--t2-ls); }
 
   <!-- ================================================================ 다크모드·인쇄 -->
   <section class="ds-section" id="theme-print">
-    <header><h2>다크모드 · 인쇄</h2><p>보는 사람의 상태는 셋이에요 — 시스템(아무 표시 없음), 명시적 라이트, 명시적 다크. CSS는 세 블록으로 이걸 다 받아요. 인쇄는 항상 라이트예요.</p></header>
+    <header><h2>다크모드 · 인쇄</h2><p>보는 사람의 상태는 셋이에요 — 시스템(아무 표시 없음), 명시적 라이트, 명시적 다크. <code>tokens.css</code>의 세 블록이 이걸 다 받아요. 화면 인쇄는 항상 라이트예요. 종이 인쇄는 색역이 달라서 아래 표를 따로 봐요.</p></header>
     <details class="rules" open><summary>CSS 구조</summary><div class="body">
       <pre>/* ① 라이트 전체 — 모든 토큰이 여기 먼저 선언돼요 */
 :root { --bg-page: #f7f9fb; --fg-primary: #16202b; … }
@@ -1069,6 +926,33 @@ h1 { font: var(--t2); letter-spacing: var(--t2-ls); }
       <div class="do"><b>이렇게</b><ul><li>컴포넌트는 시맨틱 토큰만 봐요. 미디어쿼리 안에 컴포넌트 규칙을 쓰지 않아요</li><li>다크에서 브랜드는 민트 400(<code>#2ed8c3</code>)으로 올리고, 그 위 글자는 짙은 민트</li><li>다크 그림자는 1px 링 + 짙은 그림자</li></ul></div>
       <div class="dont"><b>이렇게는 안 돼요</b><ul><li>색을 <code>[data-theme]</code> 블록 안에서만 정의하지 않아요 — 시스템 상태에서 안 보여요</li><li>라이트 값을 단순 반전하지 않아요 — 앰버·그린은 따로 골라요</li></ul></div>
     </div></details>
+    <div class="ds-sub">
+      <h3>종이 인쇄 색</h3>
+      <p>화면 hex를 CMYK로 옮겼다가 다시 화면색으로 되돌려, 원래 색과 얼마나 벌어지는지 CIEDE2000으로 쟀어요. <b>민트 400 이하는 CMYK로 재현이 안 돼요</b> — 밝고 채도 높은 청록이라 인쇄 색역 밖이에요. CMYK에서 거의 그대로 나오는 가장 밝은 민트는 <code>mint-600</code>이에요.</p>
+      <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>토큰</th><th>화면</th><th>인쇄 예상</th><th>CMYK</th><th>ΔE00</th><th>판정</th></tr></thead><tbody>
+        <tr><td>mint-50</td><td><span class="sw" style="background:#e6fbf8"></span> <code>#e6fbf8</code></td><td><span class="sw" style="background:#e5f1f0"></span> <code>#e5f1f0</code></td><td><code>C9 M1 Y4 K0</code></td><td class="num">3.9</td><td><span class="badge badge-warn">살짝 달라요</span></td></tr>
+        <tr><td>mint-100</td><td><span class="sw" style="background:#c2f4ec"></span> <code>#c2f4ec</code></td><td><span class="sw" style="background:#c7e6e2"></span> <code>#c7e6e2</code></td><td><code>C20 M0 Y8 K0</code></td><td class="num">5.4</td><td><span class="badge badge-danger">탁해져요</span></td></tr>
+        <tr><td>mint-200</td><td><span class="sw" style="background:#93ebde"></span> <code>#93ebde</code></td><td><span class="sw" style="background:#a7d8d0"></span> <code>#a7d8d0</code></td><td><code>C32 M0 Y15 K0</code></td><td class="num">7.0</td><td><span class="badge badge-danger">탁해져요</span></td></tr>
+        <tr><td>mint-300</td><td><span class="sw" style="background:#5fe2cf"></span> <code>#5fe2cf</code></td><td><span class="sw" style="background:#8ccdc3"></span> <code>#8ccdc3</code></td><td><code>C43 M0 Y22 K0</code></td><td class="num">8.1</td><td><span class="badge badge-danger">탁해져요</span></td></tr>
+        <tr><td>mint-400</td><td><span class="sw" style="background:#2ed8c3"></span> <code>#2ed8c3</code></td><td><span class="sw" style="background:#75c4b7"></span> <code>#75c4b7</code></td><td><code>C51 M0 Y27 K0</code></td><td class="num">7.7</td><td><span class="badge badge-danger">탁해져요</span></td></tr>
+        <tr><td>mint-500</td><td><span class="sw" style="background:#17bfa9"></span> <code>#17bfa9</code></td><td><span class="sw" style="background:#48b7a5"></span> <code>#48b7a5</code></td><td><code>C65 M0 Y37 K0</code></td><td class="num">3.3</td><td><span class="badge badge-warn">살짝 달라요</span></td></tr>
+        <tr><td>mint-600</td><td><span class="sw" style="background:#0fa08d"></span> <code>#0fa08d</code></td><td><span class="sw" style="background:#14a08e"></span> <code>#14a08e</code></td><td><code>C78 M7 Y47 K3</code></td><td class="num">0.4</td><td><span class="badge badge-ok">그대로 나와요</span></td></tr>
+        <tr><td>mint-700</td><td><span class="sw" style="background:#0b7f70"></span> <code>#0b7f70</code></td><td><span class="sw" style="background:#0e7f70"></span> <code>#0e7f70</code></td><td><code>C84 M19 Y53 K14</code></td><td class="num">0.1</td><td><span class="badge badge-ok">그대로 나와요</span></td></tr>
+        <tr><td>mint-800</td><td><span class="sw" style="background:#075e53"></span> <code>#075e53</code></td><td><span class="sw" style="background:#025e54"></span> <code>#025e54</code></td><td><code>C88 M29 Y58 K32</code></td><td class="num">0.5</td><td><span class="badge badge-ok">그대로 나와요</span></td></tr>
+        <tr><td>mint-900</td><td><span class="sw" style="background:#043d36"></span> <code>#043d36</code></td><td><span class="sw" style="background:#083e37"></span> <code>#083e37</code></td><td><code>C88 M37 Y62 K55</code></td><td class="num">0.4</td><td><span class="badge badge-ok">그대로 나와요</span></td></tr>
+        <tr><td>on-mint 잉크</td><td><span class="sw" style="background:#04211e"></span> <code>#04211e</code></td><td><span class="sw" style="background:#112422"></span> <code>#112422</code></td><td><code>C84 M52 Y63 K71</code></td><td class="num">3.3</td><td><span class="badge badge-warn">살짝 달라요</span></td></tr>
+        <tr><td>마크 onbrand 중간</td><td><span class="sw" style="background:#06544a"></span> <code>#06544a</code></td><td><span class="sw" style="background:#05544b"></span> <code>#05544b</code></td><td><code>C88 M32 Y60 K38</code></td><td class="num">0.5</td><td><span class="badge badge-ok">그대로 나와요</span></td></tr>
+        <tr><td>grey-100</td><td><span class="sw" style="background:#eef1f5"></span> <code>#eef1f5</code></td><td><span class="sw" style="background:#eceff1"></span> <code>#eceff1</code></td><td><code>C6 M4 Y2 K0</code></td><td class="num">1.1</td><td><span class="badge badge-ok">그대로 나와요</span></td></tr>
+        <tr><td>grey-300</td><td><span class="sw" style="background:#cbd3db"></span> <code>#cbd3db</code></td><td><span class="sw" style="background:#c9d1d6"></span> <code>#c9d1d6</code></td><td><code>C18 M11 Y7 K0</code></td><td class="num">1.6</td><td><span class="badge badge-ok">그대로 나와요</span></td></tr>
+        <tr><td>grey-500</td><td><span class="sw" style="background:#6e7a88"></span> <code>#6e7a88</code></td><td><span class="sw" style="background:#6c7b89"></span> <code>#6c7b89</code></td><td><code>C60 M44 Y31 K3</code></td><td class="num">1.3</td><td><span class="badge badge-ok">그대로 나와요</span></td></tr>
+        <tr><td>grey-600</td><td><span class="sw" style="background:#4c5866"></span> <code>#4c5866</code></td><td><span class="sw" style="background:#485866"></span> <code>#485866</code></td><td><code>C76 M60 Y42 K14</code></td><td class="num">1.7</td><td><span class="badge badge-ok">그대로 나와요</span></td></tr>
+        <tr><td>grey-900</td><td><span class="sw" style="background:#16202b"></span> <code>#16202b</code></td><td><span class="sw" style="background:#17222c"></span> <code>#17222c</code></td><td><code>C86 M72 Y48 K61</code></td><td class="num">1.2</td><td><span class="badge badge-ok">그대로 나와요</span></td></tr>
+      </tbody></table></div>
+      <details class="rules" open><summary>인쇄할 때</summary><div class="body">
+        <div class="do"><b>이렇게</b><ul><li>민트를 넓게 까는 인쇄물(명함 뒷면, 포스터 바탕)은 별색으로 찍거나, 인쇄소 교정쇄로 색을 먼저 확인해요</li><li>글자·선·작은 면처럼 색이 정확해야 하는 민트는 <code>mint-600</code> 이상을 써요</li><li>이 표는 macOS <code>Generic CMYK Profile</code>, 상대 색도 기준 근사치예요. 인쇄소가 쓰는 프로파일을 받아 <code>python3 tools/print-color.py --profile 파일.icc</code>로 다시 뽑아요</li></ul></div>
+        <div class="dont"><b>이렇게는 안 돼요</b><ul><li>화면 hex만 넘기고 같은 색을 기대하지 않아요 — <code>mint-400</code>은 ΔE 7.7만큼 탁해져요</li><li>CMYK 수치로 별색 번호를 고르지 않아요 — 인쇄소의 별색 칩을 종이 위에서 대 보고 골라요</li></ul></div>
+      </div></details>
+    </div>
   </section>
 
   <!-- ================================================================ 토큰 전체 -->
@@ -1078,27 +962,6 @@ h1 { font: var(--t2); letter-spacing: var(--t2-ls); }
     <div class="ds-table-wrap"><table class="ds-table" id="token-table"><thead><tr><th>토큰</th><th>미리보기</th><th>라이트</th><th>다크</th><th></th></tr></thead><tbody></tbody></table></div>
   </section>
 
-  <!-- ================================================================ 마이그레이션 -->
-  <section class="ds-section" id="migration">
-    <header><h2>마이그레이션</h2><p>지금 SignalB엔 팔레트가 세 벌 있어요. 기존 변수를 이 시스템의 시맨틱 토큰으로 옮기는 표예요. 이번엔 문서만 만들고 실제 교체는 다음 단계예요.</p></header>
-    <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>어디</th><th>기존</th><th>새 토큰</th><th>메모</th></tr></thead><tbody>
-      <tr><td rowspan="6">리포트 템플릿<br><code>packages/report/templates/*.html</code><br>익스텐션 <code>options.html</code></td><td><code>--brand #4f7cff</code></td><td><code>--bg-brand</code> / <code>--fg-brand</code></td><td class="wrap">파랑 → 민트. 용도별로 bg/fg 나눠요</td></tr>
-      <tr><td><code>--brand-soft</code></td><td><code>--bg-brand-soft</code></td><td></td></tr>
-      <tr><td><code>--bg / --surface</code></td><td><code>--bg-page / --bg-surface</code></td><td></td></tr>
-      <tr><td><code>--text / --muted</code></td><td><code>--fg-primary / --fg-muted</code></td><td></td></tr>
-      <tr><td><code>--line / --line-strong</code></td><td><code>--stroke-default / --stroke-strong</code></td><td></td></tr>
-      <tr><td><code>--ok/--warn/--danger (-soft/-ink/-line)</code></td><td>이름 그대로</td><td class="wrap">값만 바뀌어요. 그린은 기존 #22a06b 유지</td></tr>
-      <tr><td rowspan="5">대시보드<br><code>apps/api/templates/base.html</code></td><td><code>--surface-1 / --plane</code></td><td><code>--bg-surface / --bg-page</code></td><td class="wrap">웜 뉴트럴 → 쿨 그레이</td></tr>
-      <tr><td><code>--ink-primary / -secondary / -muted</code></td><td><code>--fg-primary / -secondary / -muted</code></td><td></td></tr>
-      <tr><td><code>--grid / --baseline / --border</code></td><td><code>--stroke-default / --stroke-strong</code></td><td></td></tr>
-      <tr><td><code>--seq-100…650</code></td><td><code>--c-mint-100…800</code></td><td class="wrap">시퀀셜 차트 램프. 시각화 검증은 dataviz 규칙으로 다시</td></tr>
-      <tr><td><code>--grade-*</code></td><td><code>--grade-*</code></td><td class="wrap">이름 같음. 값이 ok/warn/danger 별칭으로 바뀌어요</td></tr>
-      <tr><td rowspan="3">익스텐션 주입 UI<br><code>content/*.css</code>, 인라인</td><td><code>#4C6EF5 / #4263EB</code></td><td><code>--bg-brand / --bg-brand-hover</code></td><td class="wrap">인디고 → 민트</td></tr>
-      <tr><td><code>#FF6B35 / #ff8c2b</code></td><td><code>--warn / --warn-ink</code></td><td class="wrap">오렌지 강조는 warn 역할로만</td></tr>
-      <tr><td><code>#e53935</code></td><td><code>--danger</code></td><td></td></tr>
-    </tbody></table></div>
-    <p class="t8 muted">스케일 원본 참고: <code>lightez-commerce-os/src/styles/tokens.css</code>의 그레이·레드 램프를 그대로 썼고, 민트 램프만 <code>#2ed8c3</code> 중심으로 다시 짰어요.</p>
-  </section>
 </main>
 </div>
 
